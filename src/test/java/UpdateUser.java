@@ -28,5 +28,17 @@ public class UpdateUser {
             .put("/user/{username}")
         .then()
             .statusCode(200);
+        
+        // Verify User Update
+        given()
+            .pathParam("username", "testuser1")
+        .when()
+            .get("/user/{username}")
+        .then()
+            .statusCode(200)
+            .body("id", equalTo(1))
+            .body("username", equalTo("testuser1"))
+            .body("firstName", equalTo("newname"))
+            .body("lastName", equalTo("newlastname"));
     }
 }
